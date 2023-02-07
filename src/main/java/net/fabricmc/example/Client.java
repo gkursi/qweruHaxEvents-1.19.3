@@ -1,11 +1,15 @@
 package net.fabricmc.example;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.example.eventsys.Handler;
+import net.fabricmc.example.modules.TestModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExampleMod implements ModInitializer {
+public class Client implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+	public static final Handler eventHandler = new Handler();
+	TestModule Example;
 
 	@Override
 	public void onInitialize() {
@@ -15,6 +19,7 @@ public class ExampleMod implements ModInitializer {
 
 		LOGGER.info("(onInitialize) ---------------------------------------------------");
 
+		Example = new TestModule();
 
 	}
 

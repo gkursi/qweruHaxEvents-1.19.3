@@ -1,5 +1,6 @@
 package net.fabricmc.example.mixin.eventmixins;
 
+import net.fabricmc.example.Client;
 import net.fabricmc.example.eventsys.Handler;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +13,7 @@ public class MinecraftClientMixin {
 
     @Inject(method = "tick",at= @At("HEAD"), cancellable = true)
     public void onTick(CallbackInfo ci){
-        Handler.onTick();
+        Client.eventHandler.onTick();
     }
 
 
