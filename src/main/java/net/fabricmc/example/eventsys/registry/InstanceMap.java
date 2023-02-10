@@ -20,6 +20,17 @@ public class InstanceMap {
         } catch (Exception ignore){}
     }
 
+    public void add(Class<?> object, String method){
+        Object ob = NonStaticMethodRef.getObjectFromClass(object);
+        if(ob==null) return;
+        Method m;
+        try {
+            Method meth = ob.getClass().getMethod(method);
+            objects.add(ob);
+            methods.add(method);
+        } catch (Exception ignore){}
+    }
+
     public void invoke(Class<?> invokeParent, String invokable){
         boolean fail = true;
         for(Object o : objects){

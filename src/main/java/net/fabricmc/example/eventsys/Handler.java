@@ -36,7 +36,9 @@ public class Handler {
         // Client.LOGGER.info("(Handler.onTick) TICK");
         for(Class<?> c : runtimeClass) {
             try {
-                runAnnotationsInClass(TickEvent.class, c);
+                for(Class cs : eventList){
+                    runAnnotationsInClass(TickEvent.class, cs);
+                }
             } catch (Exception e){
                 Client.LOGGER.warn("[EVENT] Ignored class "+c.toGenericString());
                 Client.LOGGER.warn("Reason: "+e.toString());
@@ -48,7 +50,7 @@ public class Handler {
         for(Class<?> c: runtimeClass){
             Method[] methods = c.getMethods();
             for(Method mt : methods) {
-
+                instanceMap.add(mt.getClass(), mt.getName());
             }
         }
     } // MUST BE RAN AFTER ALL MOD INITIALIZATIONS

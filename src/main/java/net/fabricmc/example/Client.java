@@ -2,6 +2,8 @@ package net.fabricmc.example;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.example.eventsys.Handler;
+import net.fabricmc.example.eventsys.events.MoveEvent;
+import net.fabricmc.example.eventsys.events.TickEvent;
 import net.fabricmc.example.modules.TestModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +15,22 @@ public class Client implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-
-		LOGGER.info("(onInitialize) ---------------------------------------------------");
-
+		//
+		// Defining the example module.
+		// This is not a good way to create modules though,
 		Example = new TestModule();
 
+		// Registering event executors
+		Client.eventHandler.addRuntimeClass(TestModule.class);
+
+		// Registering events
+
+		eventHandler.eventList.add(TickEvent.class);
+
+
+		// Initialising the event handler.
+		// This has to be the last thing you initialise
+		eventHandler.init();
 	}
 
 
