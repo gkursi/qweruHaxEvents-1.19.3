@@ -23,7 +23,7 @@ public class Client implements ModInitializer {
 		// Registering event executors
 		Client.eventHandler.addRuntimeClass(TestModule.class);
 
-		// Registering events
+		// Registering event annotations
 
 		eventHandler.eventList.add(TickEvent.class);
 
